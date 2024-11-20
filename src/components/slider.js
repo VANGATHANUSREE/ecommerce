@@ -2,7 +2,7 @@ import React from 'react';
 import hero from '../Assets/Images/hero-img.png';
 import phone from '../Assets/Images/phone-08.png';
 import wireless from '../Assets/Images/wireless-01.png';
-import watch from '../Assets/Images/watch-06.png';
+import watch from '../Assets/Images/watch-07.png';
 import './Slider.css'; 
 
 const Slider = () => {
