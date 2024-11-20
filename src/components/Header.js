@@ -1,45 +1,48 @@
-import React from 'react'
+import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
-import { FaUser } from 'react-icons/fa';
+import { FaUser  } from 'react-icons/fa';
+import logo from '../Assets/Images/achieversIT.png';
+
 const Header = () => {
   return (
-    <>
-    <div>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Shop</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Cart</a>
-        </li>
-      </ul>
-    </div>
-    <div className="d-flex justify-content-end p-3">
-    <a href="#" className="d-flex align-items-center">
-          <FaUser size={24} />  {/* User icon */}
-          <span className="ms-2"></span>
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">
+          <img src={logo} alt="AchieversIT Logo" />
         </a>
-        <a href="#" className="d-flex align-items-center mx-3">
-          <FaShoppingCart size={24} />  {/* Cart icon */}
-          <span className="ms-2"></span>
-        </a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <ul className="navbar-nav ms-auto"> {/* Use ms-auto to push items to the right */}
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">
+                Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Shop
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Cart
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-  </div>
-</nav>
-    </div>
-    </>
+      <div className="d-flex align-items-center ms-3"> {/* Add margin to the left */}
+            <a href="#" className="d-flex align-items-center mx-3">
+              <FaUser  size={24} style={{ color: 'black' }} /> {/* User icon in black */}
+            </a>
+            <a href="#" className="d-flex align-items-center me-3"> {/* Add margin to the right */}
+              <FaShoppingCart size={24} style={{ color: 'black' }} /> {/* Cart icon in black */}
+            </a>
+          </div>
+    </nav>
+  );
+};
 
-  )
-}
-
-export default Header
+export default Header;

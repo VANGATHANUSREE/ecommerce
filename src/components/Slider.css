@@ -1,0 +1,4 @@
+.slider-image {
+    height: 400px; /* Set your desired height */
+    object-fit:none; /* This will maintain the aspect ratio and cover the area */
+  }
