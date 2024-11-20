@@ -3,35 +3,40 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
     gap: 20px; /* Space between cards */
-  }
-  
-  .card {
-    background-color: #f0f0f0; /* Example background color */
+}
+
+.card {
     padding: 20px; /* Padding inside the card */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
     border-radius: 5px; /* Optional rounded corners */
     position: relative; /* To position the discount label and heart icon */
     width: 100%; /* Ensure the card takes full width inside grid item */
-  }
-  
-  .card:hover {
+}
+
+.card img {
+    height: 250px; /* Set a fixed height for images */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    border-radius: 5px; /* Optional: match the card's border radius */
+}
+
+.card:hover {
     transform: scale(1.05); /* Optional: Scale effect on hover */
-  }
-  
-  .discount-label {
+}
+
+.discount-label {
     position: absolute;
     top: 10px; /* Distance from the top */
     left: 10px; /* Distance from the left */
-    background-color: red; /* Background color for the discount label */
+    background-color: rgb(11, 137, 211); /* Background color for the discount label */
     color: white; /* Text color */
     padding: 5px 10px; /* Padding around the text */
-    border-radius: 10px; /* Rounded corners for the label */
+    border-radius: 20px; /* Rounded corners for the label */
     font-weight: bold; /* Make the text bold */
     font-size: 14px; /* Font size for the label */
     z-index: 10; /* Ensure the label is above other elements */
-  }
-  
-  .heart-icon {
+}
+
+.heart-icon {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -40,45 +45,58 @@
     text-shadow: 0 0 0 black; /* Create a black outline effect */
     opacity: 0; /* Initially hidden */
     transition: opacity 0.2s;
-  }
-  
-  .card:hover .heart-icon {
+}
+
+.card:hover .heart-icon {
     opacity: 1; /* Show heart icon on hover */
-  }
-  
-  .star {
+}
+
+.star {
     color: lightgray; /* Default star color */
     font-size: 20px; /* Adjust star size */
-  }
-  
-  .star.filled {
+}
+
+.star.filled {
     color: gold; /* Filled star color */
-  }
-  
-  .star.half-filled {
+}
+
+.star.half-filled {
     color: gold; /* Color for half star */
     position: relative;
-  }
-  
-  .star.half-filled::after {
+}
+
+.star.half-filled::after {
     content: '★'; /* Add a second star character */
     color: lightgray; /* Set the color for the empty half */
     position: absolute;
     left: 0;
     top: 0;
     width: 50%; /* Only show half of the star */
-  }
-  
-  /* Media queries for responsive design */
-  @media (max-width: 768px) {
+}
+
+.card-price {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space between price and icon */
+}
+
+.plus-icon {
+    background-color: rgb(223, 227, 230); /* Background color for the plus icon */
+    color: rgb(70, 69, 69); /* Icon color */
+    border-radius: 50%; /* Make it circular */
+    padding: 5px; /* Padding around the icon */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
     .cards-container {
-      grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .cards-container {
-      grid-template-columns: 1fr; /* 1 card per row on small screens */
+        grid-template-columns: 1fr; /* 1 card per row on small screens */
     }
-  }
-  
+}

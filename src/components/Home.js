@@ -6,6 +6,8 @@ import watch from '../Assets/Images/watch-07.png';
 import { FaCar, FaCreditCard, FaShieldAlt, FaHeadphones } from 'react-icons/fa';
 import './Home.css'
 import DiscountProducts from './BigDiscount';
+import NewArrivals from './NewArrivals';
+
 const Home = () => {
   return (
     <>
@@ -109,6 +111,15 @@ const Home = () => {
       <h2 className="text-center">Big Discount</h2>
       <DiscountProducts />
     </div>
+    <div>
+      <h2 className="text-center">New Arrivals</h2>
+      <NewArrivals />
+    </div>
+    <div>
+      <h2 className="text-center">Best Sales</h2>
+      <DiscountProducts />
+    </div>
+    
 
 
     </>

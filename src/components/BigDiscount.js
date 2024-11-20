@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { discountProducts } from '../Assets/products'; 
-import { FaHeart } from 'react-icons/fa'; // Import the heart icon from react-icons
-import './BigDiscount.css'; // Import your CSS file
+import { FaHeart } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa'; 
+import './BigDiscount.css'; 
 
 const DiscountProducts = () => {
+  const [cart, setCart] = useState([]); // Move useState inside the component
+
+  const addToCart = (product) => {
+    setCart(prevCart => [...prevCart, product]); // Add product to the cart array
+    console.log('Cart:', [...cart, product]); // Log the cart items after adding
+  };
+
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating); // Full stars
     const halfStar = rating % 1 >= 0.5 ? 1 : 0; // Half star
@@ -20,34 +28,35 @@ const DiscountProducts = () => {
   };
 
   return (
-    <>
     <div className='container'>
-    <div className="discount-products">
-      <div className="cards-container">
-        {discountProducts.map(product => (
-          <div key={product.id} className="card">
-            <div className="discount-label">
-              {product.discount}% OFF
-            </div>
-            <img src={product.imgUrl} className="card-img-top" alt={product.productName} />
-            <div className="heart-icon">
-              <FaHeart />
-            </div>
-            <div className="card-body">
-              <h5 className="card-title">{product.productName}</h5>
-              <p className="card-price">
-                ${product.price} <span style={{ color: 'red' }}>({product.discount}% off)</span>
-              </p>
-              <div className="card-rating">
-                {renderStars(product.avgRating)}
+      <div className="discount-products">
+        <div className="cards-container">
+          {discountProducts.map(product => (
+            <div key={product.id} className="card">
+              <div className="discount-label">
+                {product.discount}% OFF
+              </div>
+              <img src={product.imgUrl} className="card-img-top" alt={product.productName} />
+              <div className="heart-icon">
+                <FaHeart />
+              </div>
+              <div className="card-body">
+                <h5 className="card-title">{product.productName}</h5>
+                <div className="card-rating">
+                  {renderStars(product.avgRating)}
+                </div>
+                <p className="card-price">
+                  ${product.price}  
+                  <span className='plus-icon' onClick={() => addToCart(product)}>
+                    <FaPlus style={{ cursor: 'pointer' }} />
+                  </span>
+                </p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
-    </div>
-    </>
   );
 };
 
