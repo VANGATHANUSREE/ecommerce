@@ -27,7 +27,7 @@
     position: absolute;
     top: 10px; /* Distance from the top */
     left: 10px; /* Distance from the left */
-    background-color: rgb(11, 137, 211); /* Background color for the discount label */
+    background-color: rgb(7, 123, 190); /* Background color for the discount label */
     color: white; /* Text color */
     padding: 5px 10px; /* Padding around the text */
     border-radius: 20px; /* Rounded corners for the label */
@@ -81,11 +81,18 @@
 }
 
 .plus-icon {
-    background-color: rgb(223, 227, 230); /* Background color for the plus icon */
-    color: rgb(70, 69, 69); /* Icon color */
-    border-radius: 50%; /* Make it circular */
+    background-color: rgb(223, 236, 243); /* Background color for the plus icon */
+    color: rgb(7 , 123, 190); /* Icon color */
+    border-radius: 75%; /* Make it circular */
     padding: 5px; /* Padding around the icon */
     cursor: pointer; /* Pointer cursor on hover */
+    transition: color 0.3s; 
+}
+
+
+.plus-icon:hover {
+    background-color:  rgb(7 , 123, 190) ;
+    color: white; /* Change icon color to white on hover */
 }
 
 /* Media queries for responsive design */

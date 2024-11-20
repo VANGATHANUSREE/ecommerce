@@ -7,6 +7,7 @@ import { FaCar, FaCreditCard, FaShieldAlt, FaHeadphones } from 'react-icons/fa';
 import './Home.css'
 import DiscountProducts from './BigDiscount';
 import NewArrivals from './NewArrivals';
+import BestSales from './BestSales';
 
 const Home = () => {
   return (
@@ -117,7 +118,7 @@ const Home = () => {
     </div>
     <div>
       <h2 className="text-center">Best Sales</h2>
-      <DiscountProducts />
+      <BestSales />
     </div>
     
 
