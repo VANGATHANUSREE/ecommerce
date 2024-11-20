@@ -7,8 +7,11 @@ const Footer = () => {
     <div> 
       <div className="footer">
         <div className="row">
-          <div className="col icon-text ">
-           <FaShoppingBag size={24} color="white"  /> <span><h6>Mart</h6></span> 
+          <div className="col">
+            <div className='icon-text '>
+           <FaShoppingBag size={24} color="white"  /> 
+           <h5>Mart</h5>
+           </div>
             <p>Lorem ipsum dolor sit amet,<br></br> consectetur adipiscing elit.<br></br> Auctor libero id et, in <br></br>gravida. Sit diam duis <br></br>mauris nulla cursus.</p>
           </div>
           <div className="col">

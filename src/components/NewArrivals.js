@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import {  newArrivals } from '../Assets/products'; 
+import { newArrivals } from '../Assets/products'; 
 import { FaHeart } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa'; 
+import { Link } from 'react-router-dom'; // Import Link
 import './BigDiscount.css'; 
+
 const NewArrivals = () => {
-  const [cart, setCart] = useState([]); // Move useState inside the component
+  const [cart, setCart] = useState([]); // State for cart
 
   const addToCart = (product) => {
     setCart(prevCart => [...prevCart, product]); // Add product to the cart array
@@ -30,9 +32,15 @@ const NewArrivals = () => {
     <div className='container'>
       <div className="discount-products">
         <div className="cards-container">
-          { newArrivals.map(product => (
+          {newArrivals.map(product => (
             <div key={product.id} className="card">
-              <img src={product.imgUrl} className="card-img-top" alt={product.productName} />
+              <Link to={`/product/${product.id}`}> {/* Use Link to navigate */}
+                <img 
+                  src={product.imgUrl} 
+                  className="card-img-top" 
+                  alt={product.productName} 
+                />
+              </Link>
               <div className="heart-icon">
                 <FaHeart />
               </div>

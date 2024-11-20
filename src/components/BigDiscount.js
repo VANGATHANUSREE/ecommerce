@@ -2,27 +2,29 @@ import React, { useState } from 'react';
 import { discountProducts } from '../Assets/products'; 
 import { FaHeart } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa'; 
+import { Link } from 'react-router-dom'; // Import Link
 import './BigDiscount.css'; 
 
 const DiscountProducts = () => {
-  const [cart, setCart] = useState([]); // Move useState inside the component
+  const [cart, setCart] = useState([]);
 
+  // Function to handle adding product to the cart
   const addToCart = (product) => {
-    setCart(prevCart => [...prevCart, product]); // Add product to the cart array
-    console.log('Cart:', [...cart, product]); // Log the cart items after adding
+    setCart(prevCart => [...prevCart, product]);
+    console.log('Cart:', [...cart, product]); // For debugging
   };
 
   const renderStars = (rating) => {
-    const fullStars = Math.floor(rating); // Full stars
-    const halfStar = rating % 1 >= 0.5 ? 1 : 0; // Half star
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
 
     return Array.from({ length: 5 }, (_, index) => {
       if (index < fullStars) {
-        return <span key={index} className="star filled">★</span>; // Full star
+        return <span key={index} className="star filled">★</span>;
       } else if (index === fullStars && halfStar) {
-        return <span key={index} className="star half-filled">★</span>; // Half star
+        return <span key={index} className="star half-filled">★</span>;
       } else {
-        return <span key={index} className="star">★</span>; // Empty star
+        return <span key={index} className="star">★</span>;
       }
     });
   };
@@ -36,7 +38,14 @@ const DiscountProducts = () => {
               <div className="discount-label">
                 {product.discount}% OFF
               </div>
-              <img src={product.imgUrl} className="card-img-top" alt={product.productName} />
+              <Link to={`/product/${product.id}`}> {/* Use Link to navigate */}
+                <img 
+                  src={product.imgUrl} 
+                  className="card-img-top" 
+                  alt={product.productName} 
+                  style={{ cursor: 'pointer' }} // Change cursor to pointer
+                />
+              </Link>
               <div className="heart-icon">
                 <FaHeart />
               </div>
