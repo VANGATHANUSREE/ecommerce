@@ -1,23 +1,25 @@
-// Cart.js
 import React from 'react';
+import { useCart } from './CartContext'; // Use CartContext to access cart state
 
 const Cart = () => {
-  const cartItems = []; // Initially, no items in the cart
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0).toFixed(2);
+  const { cartItems, removeFromCart, totalPrice } = useCart();
+
+  if (!cartItems) {
+    return <div>Loading...</div>; // Handle case where cartItems might be undefined
+  }
 
   return (
     <div>
-      <h1>Cart</h1>
-      {cartItems.length === 0 ? (
-        <p>No items in cart</p>
-      ) : (
-        <ul>
-          {cartItems.map((item, index) => (
-            <li key={index}>{item.name} - ${item.price}</li>
-          ))}
-        </ul>
-      )}
-      <h2>Total Price: ${totalPrice}</h2>
+      <h2>Your Cart</h2>
+      <ul>
+        {cartItems.map(item => (
+          <li key={item.id}>
+            {item.productName} - ${item.price}
+            <button onClick={() => removeFromCart(item.id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+      <div>Total: ${totalPrice}</div>
     </div>
   );
 };

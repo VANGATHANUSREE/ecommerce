@@ -1,20 +1,28 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom'; 
 import Header from './components/Header';
 import Home from './components/Home';
 import Footer from './components/Footer';
-import {Routes,Route } from 'react-router-dom'; // BrowserRouter only in the App component
-import ProductDetails from './components/ProductDetails'; // Ensure correct import path for ProductDetails
+import Cart from './components/Cart';
+import Shop from './components/Shop';
+import ProductDetails from './components/ProductDetails'; // Ensure correct import path
+import { CartProvider } from './components/CartContext'; // Ensure correct import path
 
 function App() {
   return (
+    <CartProvider>
       <div>
         <Header />
-        <Routes> {/* Wrap routes in Routes */}
-          <Route path="/" element={<Home />} /> {/* Home route */}
-          <Route path="/product/:id" element={<ProductDetails />} /> {/* Product details route */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/shop" element={<Shop />} />
         </Routes>
         <Footer />
       </div>
+    </CartProvider>
   );
 }
+
 export default App;
