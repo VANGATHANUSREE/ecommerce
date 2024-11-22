@@ -115,6 +115,7 @@ const Shop = () => {
       </div>
 
       {/* Display filtered products as cards */}
+      <div className='container'>
       <div className="cards-container">
         {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
@@ -140,12 +141,13 @@ const Shop = () => {
                 </p>
               </div>
             </div>
+          
           ))
         ) : (
           <div className="no-products">No products found.</div>
         )}
       </div>
-     
+      </div>
     </div>
   );
 };

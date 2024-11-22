@@ -1,93 +1,82 @@
-import React from 'react';
-import { useCart } from './CartContext'; // Use CartContext to access cart state
-import { FaTimes, FaPlus, FaMinus } from 'react-icons/fa'; // Import the X, +, and - icons from react-icons
+import React from "react";
+import { useCart } from "./CartContext";
 
 const Cart = () => {
-  const { cartItems, removeFromCart, updateQuantity, totalPrice } = useCart();
-
-  // If cartItems is empty or undefined, show loading
-  if (!cartItems) {
-    return <div>Loading...</div>;
-  }
-
-  // Get the cart count (number of items in the cart)
-  const cartCount = cartItems.length;
-
-  // Handle quantity update
-  const handleIncreaseQuantity = (id) => {
-    updateQuantity(id, 1); // Increase quantity by 1
-  };
-
-  const handleDecreaseQuantity = (id) => {
-    updateQuantity(id, -1); // Decrease quantity by 1 (make sure quantity doesn't go below 1)
-  };
+  const { cart = [], addToCart, removeFromCart, totalPrice } = useCart();
 
   return (
-    <div className="container">
-      <div className="d-flex justify-content-between">
-        {/* If cart is empty, show a message */}
-        {cartCount === 0 ? (
+    <>
+      <div className="container my-5">
+        <div className="row">
+          {/* Cart Items */}
+          <div className="col-lg-8">
+            {cart.length > 0 ? (
+              <div>
+                {cart.map((item) => (
+                  <div
+                    key={item.id}
+                    className="d-flex align-items-center mb-4 shadow-sm p-3 bg-white rounded"
+                  >
+                    {/* Product Image */}
+                    <img
+                      src={item.imgUrl}
+                      alt={item.productName}
+                      style={{
+                        width: "100px",
+                        height: "auto",
+                        objectFit: "cover",
+                        marginRight: "20px",
+                      }}
+                    />
+                    {/* Product Details */}
+                    <div style={{ flex: 1 }}>
+                      <h5 className="mb-1">{item.productName}</h5>
+                      <p className="mb-1">
+                        ${item.price.toFixed(2)} x {item.quantity} ={" "}
+                        <b>${(item.price * item.quantity).toFixed(2)}</b>
+                      </p>
+                    </div>
+                    {/* Quantity Controls */}
+                    <div className="d-flex align-items-center">
+                      <button
+                        className="btn btn-light btn-sm me-2"
+                        onClick={() => addToCart(item)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="btn btn-light btn-sm"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        -
+                      </button>
+                      {/* X Button to Remove Item */}
+                      <button
+                        className="btn btn-danger btn-sm ms-2"
+                        onClick={() => removeFromCart(item.id)} // Call removeFromCart on click
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center card">No Products are added to cart.</p>
+            )}
+          </div>
+          {/* Cart Summary */}
           <div className="card" style={{ width: '18rem' }}>
+            <div className="card-header">
+              Card Summary
+            </div>
             <div className="card-body">
-              <h6 className="card-subtitle mb-2 text-body-secondary">
-                No items are added in Cart
-              </h6>
+              <p>Total Price: <b>${totalPrice.toFixed(2)}</b></p>
             </div>
           </div>
-        ) : (
-          // List of Cart Items
-          <div className="card" style={{ width: '50%' }}>
-            <ul className="list-group list-group-flush">
-              {cartItems.map(item => (
-                <li key={item.id} className="list-group-item d-flex align-items-center">
-                  <img 
-                    src={item.imgUrl} 
-                    alt={item.productName} 
-                    style={{ width: '50px', height: '50px', marginRight: '10px' }} 
-                  />
-                  <span>{item.productName} - ${item.price}</span>
-
-                  {/* Quantity Control */}
-                  <div className="d-flex align-items-center ml-auto">
-                    <button 
-                      onClick={() => handleDecreaseQuantity(item.id)} 
-                      style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
-                    >
-                      <FaMinus color="red" />
-                    </button>
-                    <span className="mx-2">{item.quantity}</span> {/* Display quantity */}
-                    <button 
-                      onClick={() => handleIncreaseQuantity(item.id)} 
-                      style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
-                    >
-                      <FaPlus color="green" />
-                    </button>
-                  </div>
-
-                  {/* Remove Item */}
-                  <button 
-                    onClick={() => removeFromCart(item.id)} 
-                    style={{ border: 'none', background: 'transparent', cursor: 'pointer', marginLeft: '10px' }}
-                  >
-                    <FaTimes color="red" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Cart Summary Card */}
-        <div className="card" style={{ width: '18rem' }}>
-          <div className="card-header">
-            Cart Summary
-          </div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">Total: ${totalPrice}</li>
-          </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

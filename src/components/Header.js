@@ -4,14 +4,13 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { FaUser  } from 'react-icons/fa';
 import logo from '../Assets/Images/achieversIT.png';
 import { useCart } from './CartContext';
-import './Header.css'
+import './Header.css';
 
 const Header = () => {
+  const { cart = [] } = useCart(); // Default to an empty array if cart is undefined
 
-  const { cartItems } = useCart();
-
-  // Get the cart count by calculating the length of the cartItems array
-  const cartCount = cartItems.length;
+  // Get the cart count by calculating the length of the cart array
+  const cartCount = cart.length;
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -35,10 +34,10 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-          <Link className="nav-link" to="/cart">
-            Cart
-          </Link>
-        </li>
+              <Link className="nav-link" to="/cart">
+                Cart
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -47,14 +46,14 @@ const Header = () => {
           <FaUser  size={24} style={{ color: 'black' }} /> {/* User icon in black */}
         </Link>
         <Link to="/cart" className="d-flex align-items-center me-3">
-            <div className="cart-icon-container">
-              {/* Cart Icon */}
-              <FaShoppingCart size={24} style={{ color: 'black' }} />
-              
-              {/* Cart Count Badge */}
-              <span className="cart-count">{cartCount}</span>
-            </div>
-          </Link>
+          <div className="cart-icon-container">
+            {/* Cart Icon */}
+            <FaShoppingCart size={24} style={{ color: 'black' }} />
+            
+            {/* Cart Count Badge */}
+            <span className="cart-count">{cartCount}</span>
+          </div>
+        </Link>
       </div>
     </nav>
   );

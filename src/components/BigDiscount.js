@@ -2,20 +2,27 @@ import React, { useState } from 'react';
 import { discountProducts } from '../Assets/products'; 
 import { FaHeart } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa'; 
-import { Link } from 'react-router-dom'; // Import Link
+import { Link, useParams } from 'react-router-dom'; // Import useParams hook
 import './BigDiscount.css'; 
 
 const DiscountProducts = () => {
   const [cart, setCart] = useState([]);
-  const product = products.find(item => item.id === id); // Find the product by ID
- // Get the addToCart function from context
+  const { id } = useParams(); // Use useParams to get the 'id' from the URL
+
+  // Check if 'id' matches any product in 'discountProducts'
+  const product = discountProducts.find(item => item.id === parseInt(id)); // Find the product by ID
+  
   const [quantity, setQuantity] = useState(1);
+  
   // Function to handle adding product to the cart
   const addToCart = (product) => {
-    setCart(prevCart => [...prevCart, product]);
-    console.log('Cart:', [...cart, product]); // For debugging
+    if (product) { // Check if product exists
+      setCart(prevCart => [...prevCart, product]);
+     
+    }
   };
-  const handleAddToCart = () => {
+
+  const handleAddToCart = (product) => {
     addToCart({ id: product.id, name: product.productName, price: product.price, quantity });
   };
 
@@ -43,7 +50,7 @@ const DiscountProducts = () => {
               <div className="discount-label">
                 {product.discount}% OFF
               </div>
-              <Link to={`/product/${product.id}`}> {/* Use Link to navigate */}
+              <Link to={`/product/${product.id}`}> {/* Use Link to navigate */} 
                 <img 
                   src={product.imgUrl} 
                   className="card-img-top" 

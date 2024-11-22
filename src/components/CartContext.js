@@ -1,34 +1,57 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState, useContext, useMemo } from "react";
 
-// Create a Context for the Cart
 const CartContext = createContext();
 
-// Custom hook to use the Cart Context
-export const useCart = () => {
-  return useContext(CartContext);
-};
-
-// Cart Provider component to wrap the app
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cart, setCart] = useState([]);
 
-  // Function to add an item to the cart
   const addToCart = (product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+      if (existingProduct) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
   };
 
-  // Function to remove an item from the cart
   const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter(item => item.id !== productId));
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0) // Remove items with 0 quantity
+    );
   };
 
-  // Calculate total price
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0).toFixed(2);
+  const totalItems = useMemo(
+    () => cart.reduce((total, item) => total + item.quantity, 0),
+    [cart]
+  );
 
-  // Return the context provider with the necessary values
+  const totalPrice = useMemo(
+    () => cart.reduce((total, item) => total + item.price * item.quantity, 0),
+    [cart]
+  );
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, totalPrice }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, totalItems, totalPrice }}>
       {children}
     </CartContext.Provider>
   );
+};
+
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 };
