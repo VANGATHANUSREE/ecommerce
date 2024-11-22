@@ -7,11 +7,16 @@ import './BigDiscount.css';
 
 const DiscountProducts = () => {
   const [cart, setCart] = useState([]);
-
+  const product = products.find(item => item.id === id); // Find the product by ID
+ // Get the addToCart function from context
+  const [quantity, setQuantity] = useState(1);
   // Function to handle adding product to the cart
   const addToCart = (product) => {
     setCart(prevCart => [...prevCart, product]);
     console.log('Cart:', [...cart, product]); // For debugging
+  };
+  const handleAddToCart = () => {
+    addToCart({ id: product.id, name: product.productName, price: product.price, quantity });
   };
 
   const renderStars = (rating) => {
@@ -56,7 +61,7 @@ const DiscountProducts = () => {
                 </div>
                 <p className="card-price">
                   ${product.price}  
-                  <span className='plus-icon' onClick={() => addToCart(product)}>
+                  <span className='plus-icon' onClick={() => handleAddToCart(product)}>
                     <FaPlus style={{ cursor: 'pointer' }} />
                   </span>
                 </p>

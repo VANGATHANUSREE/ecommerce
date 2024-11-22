@@ -95,6 +95,81 @@
     color: white; /* Change icon color to white on hover */
 }
 
+.custom-blue {
+    background-color: rgb(7, 123, 190);  /* Your specified blue */
+    color: white !important;  /* Optional: white text color */
+  }
+  
+.product {
+    color: #f2f3f3;
+    background-image: url('../Assets/Images/table.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px; /* Optional padding */
+    height: 250px; /* Adjust the height as needed */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Center the text horizontally */
+  }
+  
+  .product::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit; /* Inherit the background image */
+    background-size: inherit;
+    background-position: inherit;
+    z-index: -1; /* Make sure the blur is behind the content */
+  }
+
+  .alert-success {
+    background-color: rgb(250, 252, 250) !important;
+    color: rgb(19, 18, 18);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;  /* Keeps it fixed in the viewport */
+    top: 20px;        /* Distance from the top of the page */
+    right: 20px;      /* Distance from the right side of the page */
+    z-index: 9999;    /* Ensures it appears above other content */
+  }
+  
+  .alert-success .btn-close {
+    background: none;
+    border: none;
+    color: rgb(8, 8, 8);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+
+  .alert-success {
+    background-color: rgb(250, 252, 250) !important;
+    color: rgb(19, 18, 18);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .alert-success .btn-close {
+    background: none;
+    border: none;
+    color: rgb(3, 3, 3);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  
+  
 /* Media queries for responsive design */
 @media (max-width: 768px) {
     .cards-container {
