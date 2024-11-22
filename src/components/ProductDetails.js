@@ -24,30 +24,49 @@ const ProductDetails = () => {
 
   return (
     <>
+    <div className='product'>
+      <h1>{product.productName}</h1>
+    </div>
       <div className="container">
-        <h1>{product.productName}</h1>
-        <img src={product.imgUrl} alt={product.productName} style={{ height: '500px', width: '75%' }} />
-        <p>Price: ${product.price}</p>
-        <p>Discount: {product.discount}% OFF</p>
-        <p>Description: {product.description}</p>
-        <p>Average Rating: {product.avgRating}</p>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+    {/* Product Image */}
+    <img
+      src={product.imgUrl}
+      alt={product.productName}
+      style={{ height: '500px', width: '40%', marginRight: '150px' }}
+    />
 
-        {/* Quantity selection */}
-        <div>
-          <label htmlFor="quantity">Quantity:</label>
-          <input
-            type="number"
-            id="quantity"
-            value={quantity}
-            min="1"
-            onChange={(e) => setQuantity(Number(e.target.value))}
-            style={{ width: '60px', marginLeft: '10px' }}
-          />
-        </div>
-        <button className="btn btn-primary" onClick={handleAddToCart}>
-          Add to Cart
-        </button>
+    {/* Product Details */}
+    <div className='ms-5'>
+      <h2>{product.productName}</h2>
+      <p>Price: ${product.price}</p>
+      <p>Discount: {product.discount}% OFF</p>
+      <p>Average Rating: {product.avgRating}</p>
+
+      {/* Quantity selection */}
+      <div>
+        <label htmlFor="quantity">Quantity:</label>
+        <input
+          type="number"
+          id="quantity"
+          value={quantity}
+          min="1"
+          onChange={(e) => setQuantity(Number(e.target.value))}
+          style={{ width: '60px', marginLeft: '10px' }}
+        />
       </div>
+
+      {/* Add to Cart button */}
+      <button className="btn btn-light" onClick={handleAddToCart}>
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
+       
+        <div className='container'>
+        <p>Description: {product.description}</p>
+        </div>
 
       <div className="container">
         <h2 className="text-center">Similar Products</h2>
@@ -69,7 +88,7 @@ const ProductDetails = () => {
                   <p>Discount: {similarProduct.discount}% OFF</p>
                   <p>Rating: {similarProduct.avgRating}</p>
                   <Link to={`/product/${similarProduct.id}`}>
-                    <button className="btn btn-primary">View Product</button>
+                    <button className="btn btn-light">View Product</button>
                   </Link>
                 </div>
               </div>

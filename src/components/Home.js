@@ -120,9 +120,6 @@ const Home = () => {
       <h2 className="text-center">Best Sales</h2>
       <BestSales />
     </div>
-    
-
-
     </>
   )
 }

@@ -3,8 +3,16 @@ import { Link } from 'react-router-dom'; // Import Link for routing
 import { FaShoppingCart } from 'react-icons/fa';
 import { FaUser  } from 'react-icons/fa';
 import logo from '../Assets/Images/achieversIT.png';
+import { useCart } from './CartContext';
+import './Header.css'
 
 const Header = () => {
+
+  const { cartItems } = useCart();
+
+  // Get the cart count by calculating the length of the cartItems array
+  const cartCount = cartItems.length;
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -27,10 +35,10 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/cart"> {/* Use Link for Cart */}
-                Cart
-              </Link>
-            </li>
+          <Link className="nav-link" to="/cart">
+            Cart
+          </Link>
+        </li>
           </ul>
         </div>
       </div>
@@ -38,9 +46,15 @@ const Header = () => {
         <Link to="/profile" className="d-flex align-items-center mx-3"> {/* Use Link for user icon */}
           <FaUser  size={24} style={{ color: 'black' }} /> {/* User icon in black */}
         </Link>
-        <Link to="/cart" className="d-flex align-items-center me-3"> {/* Use Link for cart icon */}
-          <FaShoppingCart size={24} style={{ color: 'black' }} /> {/* Cart icon in black */}
-        </Link>
+        <Link to="/cart" className="d-flex align-items-center me-3">
+            <div className="cart-icon-container">
+              {/* Cart Icon */}
+              <FaShoppingCart size={24} style={{ color: 'black' }} />
+              
+              {/* Cart Count Badge */}
+              <span className="cart-count">{cartCount}</span>
+            </div>
+          </Link>
       </div>
     </nav>
   );
