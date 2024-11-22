@@ -1,0 +1,26 @@
+/* Container for cart icon and count */
+.cart-icon-container {
+    position: relative; /* Needed for absolute positioning of the count */
+    display: inline-block; /* Ensure the container takes the correct width */
+  }
+  
+  /* Style for the cart icon (FaShoppingCart icon) */
+  .cart-icon-container .react-icons {
+    width: 24px; /* Set the size of the cart icon */
+    height: 24px;
+  }
+  
+  /* Style for the cart count label */
+  .cart-count {
+    position: absolute;  /* Position the label absolutely */
+    top: -5px;           /* Adjust to position it slightly above the icon */
+    right: -5px;         /* Position it to the top-right corner of the icon */
+    background-color: rgb(7, 123, 190);;
+    color: white;
+    border-radius: 50%;
+    padding: 0 5px;      /* Space around the count */
+    font-size: 12px;     /* Adjust font size for the label */
+    font-weight: bold;   /* Make the count text bold */
+    z-index: 10;         /* Ensure it is on top of the icon */
+  }
+  

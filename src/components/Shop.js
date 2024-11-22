@@ -13,25 +13,17 @@ const Shop = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [showPopup, setShowPopup] = useState(false);
  
-   
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
     }, 500); // Delay for debounce
     return () => clearTimeout(timer); // Cleanup the timeout
   }, [searchTerm]);
+
   // UseEffect to update filtered products whenever the category or search term changes
   useEffect(() => {
     filterProducts(selectedCategory, debouncedSearchTerm);
   }, [selectedCategory, debouncedSearchTerm]);
-
-  // Debounce search functionality (to limit number of filters triggered during typing)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearchTerm(searchTerm);
-    }, 500); // Adjust the delay to your liking
-    return () => clearTimeout(timer); // Clean up the timeout on component unmount or before setting a new one
-  }, [searchTerm]);
 
   // Function to handle category selection
   const handleCategorySelect = (category) => {
@@ -56,50 +48,70 @@ const Shop = () => {
   const handleAddToCart = (product) => {
     addToCart(product);
     setShowPopup(true); // Show the popup message
+  
+    // Hide the popup after 2 seconds
     setTimeout(() => {
       setShowPopup(false); // Hide the popup after 2 seconds
     }, 2000);
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Products</h2>
+    <div>
+      <div>
+      <h2 className='product'>Products</h2> 
+      </div>
+      {showPopup && (
+        <div
+          className=" containeralert alert-success d-flex justify-content-between align-item-center"
+        >
+          <span>
+            ✅ Product has been added to cart
+          </span>
+          <button
+            onClick={() => setShowPopup(false)}
+            className="btn-close"
+            aria-label="Close"
+          />
+        </div>
+      )}
 
       {/* Category Dropdown */}
-      <div className="btn-group mb-3">
-        <button className="btn btn-secondary btn-sm" type="button">
-          Categories
-        </button>
-        <button
-          type="button"
-          className="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <span className="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul className="dropdown-menu">
-          <li><a className="dropdown-item" onClick={() => handleCategorySelect('sofa')}>Sofa</a></li>
-          <li><a className="dropdown-item" onClick={() => handleCategorySelect('chair')}>Chair</a></li>
-          <li><a className="dropdown-item" onClick={() => handleCategorySelect('mobile')}>Mobile</a></li>
-          <li><a className="dropdown-item" onClick={() => handleCategorySelect('watch')}>Watch</a></li>
-          <li><a className="dropdown-item" onClick={() => handleCategorySelect('wireless')}>Wireless</a></li>
-        </ul>
-      </div>
+      <div className="container d-flex mb-3">
+        <div className="btn-group me-3 w-25 custom-blue">
+          <button className="btn btn-sm  custom-blue" type="button">
+            Filter by Category
+          </button>
+          <button
+            type="button"
+            className="btn btn-sm custom-blue dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span className="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul className="dropdown-menu">
+            <li><a className="dropdown-item" onClick={() => handleCategorySelect('sofa')}>Sofa</a></li>
+            <li><a className="dropdown-item" onClick={() => handleCategorySelect('chair')}>Chair</a></li>
+            <li><a className="dropdown-item" onClick={() => handleCategorySelect('mobile')}>Mobile</a></li>
+            <li><a className="dropdown-item" onClick={() => handleCategorySelect('watch')}>Watch</a></li>
+            <li><a className="dropdown-item" onClick={() => handleCategorySelect('wireless')}>Wireless</a></li>
+          </ul>
+        </div>
 
-      {/* Search Bar */}
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search for products..."
-          aria-label="Search for products"
-          value={searchTerm}
-          onChange={handleSearch} // Update search term state
-        />
-        <button className="btn btn-outline-secondary" type="button">
-          <FaSearch />
-        </button>
+        {/* Search Bar */}
+        <div className="input-group flex-fill w-25">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search for products..."
+            aria-label="Search for products"
+            value={searchTerm}
+            onChange={handleSearch} // Update search term state
+          />
+          <button className="btn btn-outline-secondary" type="button">
+            <FaSearch />
+          </button>
+        </div>
       </div>
 
       {/* Display filtered products as cards */}
@@ -122,7 +134,7 @@ const Shop = () => {
                 </div>
                 <p className="card-price">
                   ${product.price}  
-                  <span className='plus-icon' onClick={() => addToCart(product)}>
+                  <span className='plus-icon' onClick={() => handleAddToCart(product)}>
                     <FaPlus style={{ cursor: 'pointer' }} />
                   </span>
                 </p>
@@ -133,6 +145,7 @@ const Shop = () => {
           <div className="no-products">No products found.</div>
         )}
       </div>
+     
     </div>
   );
 };
